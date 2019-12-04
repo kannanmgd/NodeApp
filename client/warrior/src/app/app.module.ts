@@ -8,7 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule} from '@angular/material';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatTabsModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,9 @@ import { MatFormFieldModule, MatInputModule} from '@angular/material';
     FormsModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

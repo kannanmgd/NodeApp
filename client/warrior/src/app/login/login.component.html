@@ -1,8 +1,41 @@
-<div >
-    <form [formGroup]="loginform" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-            <mat-label>User Name</mat-label>
-            <input placeholder="Enter your username" type="text" matInput autocomplete="off" formControlName="userName">
-        </mat-form-field>
+<div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center" fxFlex="100">
+    <form *ngIf="isLogin" [formGroup]="loginform" novalidate autocomplete="off" class="loginform"
+        (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+        <div fxLayout="column" class="width50">
+            <mat-form-field appearance="outline">
+                <mat-label>User Name</mat-label>
+                <input placeholder="Enter your username" type="text" matInput autocomplete="off"
+                    formControlName="userName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input placeholder="Enter a Password" type="text" matInput autocomplete="off"
+                    formControlName="password">
+            </mat-form-field>
+            <button mat-raised-button color="primary">Login</button>
+        </div>
+        <p class="new-user">New user <a (click)="register()">register here</a></p>
+    </form>
+    <form *ngIf="isRegister" [formGroup]="registerForm" novalidate autocomplete="off" class="loginform"
+        (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+        <div fxLayout="column" class="width50">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input placeholder="Enter your name" type="text" matInput autocomplete="off"
+                    formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input placeholder="Enter a Password" type="text" matInput autocomplete="off"
+                    formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input placeholder="Enter a Password" type="text" matInput autocomplete="off"
+                    formControlName="password">
+            </mat-form-field>
+            <button mat-raised-button color="primary">Register</button>
+        </div>
+        <p class="new-user">Already have a account, <a (click)="login()">login</a></p>
     </form>
 </div>
