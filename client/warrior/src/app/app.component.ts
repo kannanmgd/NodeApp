@@ -13,17 +13,5 @@ export class AppComponent implements OnInit {
   title = 'warrior';
 
   ngOnInit() {
-    this.getUsers();
-  }
-
-  getUsers() {
-    const resUrl = 'http://localhost:8000/api/users';
-    this.http.get(resUrl).subscribe(data => {
-      console.log(data);
-    });
-  }
-
-  login() {
-    this.router.navigate(['/login']);
   }
 }
