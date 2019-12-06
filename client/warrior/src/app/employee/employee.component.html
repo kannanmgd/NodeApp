@@ -1,0 +1,35 @@
+<div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center" fxFlex="100">
+    <form [formGroup]="employeeForm" novalidate autocomplete="off" class="employeeForm" (ngSubmit)="onRegister()"
+        fxLayout="column" fxLayoutAlign="center center" fxFlex="35" fxLayoutGap="10px">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input placeholder="Enter employee name" type="text" matInput autocomplete="off" formControlName="name">
+            <mat-error *ngIf="isFieldValidRegister('name')">
+                Please enter employee name
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input placeholder="Enter a email" type="text" matInput autocomplete="off" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Age</mat-label>
+            <input placeholder="Enter employee age" type="text" matInput autocomplete="off" formControlName="password">
+            <mat-error *ngIf="isFieldValidRegister('password')">
+                Please enter employee age
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label> Department </mat-label>
+            <mat-select formControlName="department">
+                <mat-option value="1">
+                    House keeping
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="isFieldValidRegister('department')">
+                Please enter employee department
+            </mat-error>
+        </mat-form-field>
+        <button [disabled]="!employeeForm.valid" mat-raised-button color="primary">Register</button>
+    </form>
+</div>

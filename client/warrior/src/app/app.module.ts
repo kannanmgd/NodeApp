@@ -13,13 +13,18 @@ import {
   MatInputModule,
   MatButtonModule,
   MatTabsModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule
 } from '@angular/material';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import {
     MatInputModule,
     MatButtonModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,5 @@
-const http = require('http');
-const express = require('express');
 const mysql = require('mysql');
-const bodyParser = require('body-parser');
 const encrypt = require('password-hash');
-const app = express();
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -12,11 +8,14 @@ const con = mysql.createConnection({
     database: 'mydb'
 });
 
+// Global variables
+let authCustomerId;
+
 con.connect(function (err) {
     if (err) {
         console.log('login db error ' + err);
     } else {
-        console.log('db connected');
+        console.log('db connected in login module');
     }
 });
 
@@ -49,10 +48,12 @@ exports.login = (req, res) => {
               })
         } else {
             if (results.length > 0) {
+                authCustomerId = results[0].id ? results[0].id : '';
                 const compare = encrypt.verify(req.body.password, results[0].password); // returns true or false
                 if (compare) {
                     res.status(200).send({
-                        val: 'success'
+                        val: 'success',
+                        custId: results[0].id
                     });
                 } else {
                     res.status(200).send({
@@ -68,8 +69,8 @@ exports.login = (req, res) => {
     });
 }
 
-exports.allUsers = (req, res) => {
-    con.query('SELECT * FROM customers', (err, result) => {
+exports.authUser = (req, res) => {
+    con.query('SELECT username, email FROM customers WHERE id = ?', [authCustomerId], (err, result) => {
         if (err) {
             res.status(400).send('Error in getting data')
         } else {

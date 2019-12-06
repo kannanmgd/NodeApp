@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
   title = 'warrior';
+  isDashboard: any;
 
   ngOnInit() {
   }
