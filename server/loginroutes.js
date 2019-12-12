@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const encrypt = require('password-hash');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -39,6 +41,7 @@ exports.register = (req, res) => {
 }
 exports.login = (req, res) => {
     const uName = req.body.userName
+    console.log(uName);
     con.query('SELECT * FROM customers WHERE username = ?', [uName], (err, results, fields) => {
         if (err) {
             console.log('error occured', err);
@@ -49,11 +52,13 @@ exports.login = (req, res) => {
         } else {
             if (results.length > 0) {
                 authCustomerId = results[0].id ? results[0].id : '';
-                const compare = encrypt.verify(req.body.password, results[0].password); // returns true or false
+                const compare = encrypt.verify(req.body.passWord, results[0].password); // returns true or false
                 if (compare) {
+                    var token = jwt.sign({userID: results[0].id}, 'my-seceret', {expiresIn: '1d'})
                     res.status(200).send({
                         val: 'success',
-                        custId: results[0].id
+                        custId: results[0].id,
+                        token
                     });
                 } else {
                     res.status(200).send({

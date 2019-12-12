@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
-
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +20,9 @@ export class LoginComponent implements OnInit {
   regStatus: any = {};
   successScreen: any = false;
   isValidcustomer: any;
+  public error: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     this.isLogin = true;
@@ -66,12 +69,20 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const formval = this.loginform.value;
-    this.http.post('http://localhost:8000/api/login', formval).subscribe(res => {
-      this.isValidcustomer = res;
-      if (this.isValidcustomer.val === 'success') {
-        this.router.navigate(['/dashboard']);
-      }
-    });
+    const username = formval.userName;
+    const password = formval.password;
+    // this.http.post('http://localhost:8000/api/login', formval).subscribe(res => {
+    //   this.isValidcustomer = res;
+    //   if (this.isValidcustomer.val === 'success') {
+    //     this.router.navigate(['/dashboard']);
+    //   }
+    // });
+    this.auth.login(username, password)
+    .pipe(first())
+    .subscribe(
+      result => this.router.navigate(['/dashboard']),
+      err => this.error = 'errorororrh'
+    );
   }
 
 }

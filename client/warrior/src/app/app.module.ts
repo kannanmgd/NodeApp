@@ -20,6 +20,13 @@ import {
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -43,9 +50,19 @@ import { EmployeeComponent } from './employee/employee.component';
     MatIconModule,
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:8000'],
+        blacklistedRoutes: ['localhost:8000/api/login']
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
