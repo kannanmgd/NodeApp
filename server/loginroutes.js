@@ -70,11 +70,13 @@ exports.login = (req, res) => {
 }
 
 exports.authUser = (req, res) => {
-    con.query('SELECT username, email FROM customers WHERE id = ?', [authCustomerId], (err, result) => {
+    var q = "SELECT employee_Id, employee_name, employee_email, employee_age, employee_type, employee_dpt, CONCAT(address_1, ', ',address_2, ', ',city, ', ',state,', ',pincode) AS address FROM employees WHERE active_status = 'yes'";
+    con.query(q, (err, result) => {
         if (err) {
+            console.log(result);
             res.status(400).send('Error in getting data')
         } else {
             res.send(result);
         }
-    })
+    });
 }

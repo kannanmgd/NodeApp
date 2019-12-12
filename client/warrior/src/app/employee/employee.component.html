@@ -1,35 +1,100 @@
-<div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center" fxFlex="100">
-    <form [formGroup]="employeeForm" novalidate autocomplete="off" class="employeeForm" (ngSubmit)="onRegister()"
-        fxLayout="column" fxLayoutAlign="center center" fxFlex="35" fxLayoutGap="10px">
-        <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input placeholder="Enter employee name" type="text" matInput autocomplete="off" formControlName="name">
-            <mat-error *ngIf="isFieldValidRegister('name')">
-                Please enter employee name
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input placeholder="Enter a email" type="text" matInput autocomplete="off" formControlName="email">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Age</mat-label>
-            <input placeholder="Enter employee age" type="text" matInput autocomplete="off" formControlName="password">
-            <mat-error *ngIf="isFieldValidRegister('password')">
-                Please enter employee age
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field >
-            <mat-label> Department </mat-label>
-            <mat-select formControlName="department">
-                <mat-option value="1">
-                    House keeping
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="isFieldValidRegister('department')">
-                Please enter employee department
-            </mat-error>
-        </mat-form-field>
-        <button [disabled]="!employeeForm.valid" mat-raised-button color="primary">Register</button>
-    </form>
+<div class="full-height" fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center" fxFlex="100">
+    <div fxFlex="50" class="box-style" fxLayout="column" fxLayoutAlign="center center">
+        <form [formGroup]="employeeForm" novalidate autocomplete="off" class="employeeForm" (ngSubmit)="onSubmit()"
+            fxLayoutGap="16px">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input placeholder="Enter employee name" type="text" matInput autocomplete="off" formControlName="name">
+                <mat-error *ngIf="isFieldValidRegister('name')">
+                    Please enter employee name
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input placeholder="Enter a email" type="text" matInput autocomplete="off" formControlName="email">
+                <mat-error *ngIf="isFieldValidRegister('email')">
+                    Please enter email
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Age</mat-label>
+                <input placeholder="Enter employee age" type="text" matInput autocomplete="off"
+                    formControlName="age">
+                <mat-error *ngIf="isFieldValidRegister('age')">
+                    Please enter employee age
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> Department </mat-label>
+                <mat-select formControlName="department">
+                    <mat-option value="Admin">
+                        Admin
+                    </mat-option>
+                    <mat-option value="Developement">
+                        Developement
+                    </mat-option>
+                    <mat-option value="Testing">
+                        Testing
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="isFieldValidRegister('department')">
+                    Please enter employee department
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> Role </mat-label>
+                <mat-select formControlName="role">
+                    <mat-option value="Analyst">
+                        Analyst
+                    </mat-option>
+                    <mat-option value="Analyst">
+                        Team Lead
+                    </mat-option>
+                    <mat-option value="Analyst">
+                        Tester
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="isFieldValidRegister('department')">
+                    Please enter employee role
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Address line one</mat-label>
+                <input placeholder="Enter address line 1" type="text" matInput autocomplete="off" formControlName="addlineOne">
+                <mat-error *ngIf="isFieldValidRegister('addlineOne')">
+                    Please enter address line one
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Address line two</mat-label>
+                <input placeholder="Enter address line 2" type="text" matInput autocomplete="off" formControlName="addlineTwo">
+                <mat-error *ngIf="isFieldValidRegister('addlineTwo')">
+                    Please enter address line two
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input placeholder="Enter city" type="text" matInput autocomplete="off" formControlName="city">
+                <mat-error *ngIf="isFieldValidRegister('city')">
+                    Please enter the city
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>State</mat-label>
+                <input placeholder="Enter state" type="text" matInput autocomplete="off" formControlName="state">
+                <mat-error *ngIf="isFieldValidRegister('state')">
+                    Please enter the state
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Pincode</mat-label>
+                <input placeholder="Enter pincode" type="text" matInput autocomplete="off" formControlName="pincode">
+                <mat-error *ngIf="isFieldValidRegister('pincode')">
+                    Please enter the pincode
+                </mat-error>
+            </mat-form-field>
+            <button [disabled]="!employeeForm.valid" mat-raised-button color="primary">Add Employee</button>
+            <a (click)="goback()" mat-stroked-button color="warn">Back</a>
+        </form>
+    </div>
 </div>

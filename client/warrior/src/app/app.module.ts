@@ -14,7 +14,9 @@ import {
   MatButtonModule,
   MatTabsModule,
   MatIconModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -39,7 +41,9 @@ import { EmployeeComponent } from './employee/employee.component';
     MatButtonModule,
     MatTabsModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
