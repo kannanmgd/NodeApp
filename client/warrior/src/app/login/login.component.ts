@@ -80,8 +80,13 @@ export class LoginComponent implements OnInit {
     this.auth.login(username, password)
     .pipe(first())
     .subscribe(
-      result => this.router.navigate(['/dashboard']),
-      err => this.error = 'errorororrh'
+      result => {
+        this.isValidcustomer = result;
+        if (this.isValidcustomer.val === 'success') {
+          this.router.navigate(['/dashboard']);
+        }
+      },
+      err => this.error = 'Could not authenticate'
     );
   }
 

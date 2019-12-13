@@ -27,7 +27,8 @@ exports.addEmployee = (req, res) => {
         } else {
             if (results.length > 0) {
                 res.send({
-                    val: 'user email already exist'
+                    val: 'fail',
+                    result: 'User alreday Exist'
                 });
             } else {
                 addEmp = `INSERT INTO employees(employee_name, employee_email, employee_age, employee_type, 

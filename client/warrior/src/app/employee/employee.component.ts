@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
+import { CommonPopupComponent } from '../shared/common-popup/common-popup.component';
 
 @Component({
   selector: 'app-employee',
@@ -12,12 +15,17 @@ export class EmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   addEmpResponse: any;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit() {
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['kannan@hotmail.com', [Validators.required, Validators.email]],
       age: ['', Validators.required],
       department: ['', Validators.required],
       role: ['', Validators.required],
@@ -48,6 +56,8 @@ export class EmployeeComponent implements OnInit {
       this.addEmpResponse = res;
       if (this.addEmpResponse.val === 'success') {
         this.router.navigate(['/dashboard']);
+      } else if (this.addEmpResponse.val === 'fail') {
+        this.showErrorPopup(this.addEmpResponse.result);
       }
     });
   }
@@ -59,6 +69,22 @@ export class EmployeeComponent implements OnInit {
 
   goback() {
     this.router.navigate(['/dashboard']);
+  }
+
+  showErrorPopup(error) {
+    const errorPopupData = {
+        icon: 'error_outline',
+        popUpHeader: error,
+        description: 'Please try different email id',
+        btnName: 'Okay',
+        action: ''
+    };
+    const dialogRef = this.dialog.open( CommonPopupComponent, {
+      data: errorPopupData ,
+      width: '500px',
+      disableClose: true,
+      hasBackdrop: true,
+    });
   }
 
 }

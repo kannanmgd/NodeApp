@@ -23,6 +23,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { CustomValidationDirective } from './directive/custom-validation.directive';
+import { CommonPopupComponent } from './shared/common-popup/common-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -33,7 +36,9 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    CustomValidationDirective,
+    CommonPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ export function tokenGetter() {
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -63,6 +69,7 @@ export function tokenGetter() {
     AuthService,
     AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CommonPopupComponent]
 })
 export class AppModule { }

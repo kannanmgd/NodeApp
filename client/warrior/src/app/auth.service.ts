@@ -17,7 +17,7 @@ export class AuthService {
         localStorage.setItem('access_token', result.token);
         const timeToLogin = Date.now() + 300000;
         localStorage.setItem('timer', JSON.stringify(timeToLogin));
-        return true;
+        return result;
       })
     );
   }

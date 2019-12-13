@@ -40,8 +40,7 @@ exports.register = (req, res) => {
     });
 }
 exports.login = (req, res) => {
-    const uName = req.body.userName
-    console.log(uName);
+    const uName = req.body.userName;
     con.query('SELECT * FROM customers WHERE username = ?', [uName], (err, results, fields) => {
         if (err) {
             console.log('error occured', err);

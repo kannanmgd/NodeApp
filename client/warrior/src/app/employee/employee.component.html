@@ -19,7 +19,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Age</mat-label>
                 <input placeholder="Enter employee age" type="text" matInput autocomplete="off"
-                    formControlName="age">
+                    formControlName="age" appInputType="onlyNumber" maxlength="2">
                 <mat-error *ngIf="isFieldValidRegister('age')">
                     Please enter employee age
                 </mat-error>
@@ -88,12 +88,14 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Pincode</mat-label>
-                <input placeholder="Enter pincode" type="text" matInput autocomplete="off" formControlName="pincode">
+                <input placeholder="Enter pincode" type="text" matInput autocomplete="off" 
+                formControlName="pincode" appInputType="onlyNumber" maxlength="6">
                 <mat-error *ngIf="isFieldValidRegister('pincode')">
                     Please enter the pincode
                 </mat-error>
             </mat-form-field>
-            <button [disabled]="!employeeForm.valid" mat-raised-button color="primary">Add Employee</button>
+             <!-- [disabled]="!employeeForm.valid" -->
+            <button mat-raised-button color="primary">Add Employee</button>
             <a (click)="goback()" mat-stroked-button color="warn">Back</a>
         </form>
     </div>
