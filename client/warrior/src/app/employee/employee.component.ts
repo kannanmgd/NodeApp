@@ -73,7 +73,7 @@ export class EmployeeComponent implements OnInit {
 
   showErrorPopup(error) {
     const errorPopupData = {
-        icon: 'error_outline',
+        icon: 'error',
         popUpHeader: error,
         description: 'Please try different email id',
         btnName: 'Okay',

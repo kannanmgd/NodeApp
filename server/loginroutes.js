@@ -23,19 +23,37 @@ con.connect(function (err) {
 
 exports.register = (req, res) => {
     const password = encrypt.generate(req.body.password);
+    const uname = req.body.name;
     var users = [
-        [req.body.name, password, req.body.email]
+        [uname, password, req.body.email]
     ]
-    const sql = "INSERT INTO customers(username, password, email) VALUES ?";
-    con.query(sql, [users], function (err, results, fields) {
+    con.query('SELECT * FROM customers WHERE username = ?', [uname], (err, result, firlds) => {
         if (err) {
             console.log('error occured', err);
-            res.status(400).send('error storing datas')
-        } else {
-            console.log('the solution is', results);
-            res.status(200).send({
-                val: 'Success'
+            res.send({
+                "code":400,
+                "failed":"error ocurred"
             });
+        } else {
+            if (result.length > 0) {
+                res.status(200).send({
+                    val: 'fail',
+                    data: 'Username alredy exist'
+                });
+            } else {
+                const sql = "INSERT INTO customers(username, password, email) VALUES ?";
+                con.query(sql, [users], function (err, results, fields) {
+                    if (err) {
+                        console.log('error occured', err);
+                        res.status(400).send('error storing datas')
+                    } else {
+                        console.log('the solution is', results);
+                        res.status(200).send({
+                            val: 'Success'
+                        });
+                    }
+                });
+            }
         }
     });
 }

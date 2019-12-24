@@ -1,12 +1,10 @@
-<div *ngIf="stepperMsg">
+<div class="close-popup" (click)="onClose()" fxLayout="row" fxLayoutAlign="end end">
     <i class="material-icons">
-        {{stepperMsg.icon}}
+        close
     </i>
-    
 </div>
-
-<div (click)="onClose()">
-        <i class="material-icons">
-                {{stepperMsg.icon}}
-            </i>
+<div *ngIf="stepperMsg" fxLayout="column" fxLayoutAlign="center center" class="popIcon">
+    <p *ngIf="stepperMsg.popUpHeader">{{stepperMsg.popUpHeader}}</p>
+    <p *ngIf="stepperMsg.description">{{stepperMsg.description}}</p>
+    <button mat-raised-button color="primary" (click)="onClose()">{{stepperMsg.btnName}}</button>
 </div>
