@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.tokenChecking();
     this.isLogin = true;
     this.loginform = this.fb.group({
       userName: ['', Validators.required],
@@ -42,6 +43,13 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+  tokenChecking() {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      this.router.navigate(['dashboard']);
+    }
   }
 
   register() {

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
-
 import { CommonPopupComponent } from '../shared/common-popup/common-popup.component';
 
 @Component({
@@ -14,18 +13,26 @@ import { CommonPopupComponent } from '../shared/common-popup/common-popup.compon
 export class EmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   addEmpResponse: any;
+  updateEmpId: any;
+  updateButton: any = false;
+  addButton: any = false;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    private activateRoute: ActivatedRoute,
     public dialog: MatDialog
     ) { }
 
   ngOnInit() {
+    this.onLoad();
+  }
+
+  onLoad() {
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['kannan@hotmail.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       age: ['', Validators.required],
       department: ['', Validators.required],
       role: ['', Validators.required],
@@ -34,6 +41,30 @@ export class EmployeeComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       pincode: ['', Validators.required]
+    });
+
+    this.activateRoute.queryParamMap.subscribe(params => {
+      const paramsValues = {...params};
+      this.updateEmpId = paramsValues['params'];
+      this.http.post('http://localhost:8000/api/editEmployee', this.updateEmpId).subscribe(res => {
+        const response = res[0];
+        this.updateButton = response ? true : false;
+        this.addButton = response ? false : true;
+        this.employeeForm.patchValue(
+          {
+            name: response.employee_name,
+            email: response.employee_email,
+            age: response.employee_age,
+            department: response.employee_dpt,
+            role: response.employee_type,
+            addlineOne: response.address_1,
+            addlineTwo: response.address_2,
+            city: response.city,
+            state: response.state,
+            pincode: response.pincode,
+          }
+          );
+      });
     });
   }
 
@@ -65,6 +96,10 @@ export class EmployeeComponent implements OnInit {
   isFieldValidRegister(field): boolean {
     return ((!this.employeeForm.get(field).valid && this.employeeForm.get(field).touched) ||
       (this.employeeForm.get(field).untouched));
+  }
+
+  setFormValues(data) {
+
   }
 
   goback() {

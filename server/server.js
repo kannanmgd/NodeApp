@@ -18,8 +18,9 @@ app.use(function (req, res, next) {
 app.route('/api/user').get(login.authUser);
 app.route('/api/register').post(login.register);
 app.route('/api/login').post(login.login);
-app.route('/api/addEmployee').post(employee.addEmployee)
-app.route('/api/deleteemp').post(employee.deleteEmp)
+app.route('/api/addEmployee').post(employee.addEmployee);
+app.route('/api/deleteemp').post(employee.deleteEmp);
+app.route('/api/editEmployee').post(employee.editEmployee);
 app.listen(8000, () => {
-    console.log('Server started!')
+    console.log('Server started @ "port = 8000" !');
 });

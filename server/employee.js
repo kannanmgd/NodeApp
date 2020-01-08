@@ -68,3 +68,19 @@ exports.deleteEmp = (req, res) => {
         }
     });
 }
+
+exports.editEmployee = (req, res) => {
+    const empId = req.body.id;
+    getEmp = "SELECT * FROM employees WHERE employee_Id = ?"
+    con.query(getEmp, [empId], (err, results, fields) => {
+        if (err) {
+            res.status(400).send({
+                'error': 'error getting data'
+            })
+        } else {
+            res.status(200).send(
+                results
+            );
+        }
+    })
+}

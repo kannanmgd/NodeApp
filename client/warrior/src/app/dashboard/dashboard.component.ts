@@ -11,8 +11,16 @@ import {MatTableDataSource} from '@angular/material/table';
 export class DashboardComponent implements OnInit {
   employeeDetails: any;
 
-  displayedColumns: string[] = ['employee_Id', 'employee_name', 'employee_email', 'employee_age', 'employee_type',
-  'employee_dpt', 'address', 'update'];
+  displayedColumns: string[] = [
+    'employee_Id',
+    'employee_name',
+    'employee_email',
+    'employee_age',
+    'employee_type',
+    'employee_dpt',
+    'address',
+    'update'
+  ];
   dataSource;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   data: any;
@@ -36,8 +44,10 @@ export class DashboardComponent implements OnInit {
   }
 
   editEmployee(data) {
-    console.log(data);
+    const empId = {employee_Id: data.employee_Id};
+    this.router.navigate(['/employee'], {queryParams: {id: data.employee_Id}});
   }
+
   deleteEmployee(data) {
     const test: any = {employee_Id: data.employee_Id};
     this.http.post('http://localhost:8000/api/deleteemp', test).subscribe(response => {
@@ -46,5 +56,8 @@ export class DashboardComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.employeeDetails);
       this.dataSource.paginator = this.paginator;
     });
+  }
+  viewEmployee(data) {
+    console.log(data);
   }
 }

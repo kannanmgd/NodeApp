@@ -1,4 +1,3 @@
-<br>
 <div class="dashboard" fxLayout="row" fxLayoutAlign="space-between">
   <p class="dash_header">Employee Details</p>
   <a class="add_employee" (click)="addEmployee()">
@@ -16,7 +15,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="employee_name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.employee_name}} </td>
+      <td mat-cell *matCellDef="let element"><a title="view" (click)="viewEmployee(element)">{{element.employee_name}} </a></td>
     </ng-container>
 
     <!-- Weight Column -->

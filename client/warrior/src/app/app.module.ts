@@ -26,6 +26,7 @@ import { AuthGuard } from './auth.guard';
 import { CustomValidationDirective } from './directive/custom-validation.directive';
 import { CommonPopupComponent } from './shared/common-popup/common-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AppHeaderComponent } from './app-header/app-header.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -38,7 +39,8 @@ export function tokenGetter() {
     DashboardComponent,
     EmployeeComponent,
     CustomValidationDirective,
-    CommonPopupComponent
+    CommonPopupComponent,
+    AppHeaderComponent
   ],
   imports: [
     BrowserModule,

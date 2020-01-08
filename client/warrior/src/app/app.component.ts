@@ -16,23 +16,23 @@ export class AppComponent implements OnInit {
   isDashboard: any;
 
   ngOnInit() {
-    this.sessionHandles();
+    // this.sessionHandles();
   }
 
-  logout() {
-    this.auth.logout();
-    this.router.navigate(['login']);
-  }
+  // logout() {
+  //   this.auth.logout();
+  //   this.router.navigate(['login']);
+  // }
 
-  sessionHandles() {
-    const timer = JSON.parse(localStorage.getItem('timer'));
-    const token = JSON.parse(localStorage.getItem('access_token'));
-    if (timer && (Date.now() > timer)) {
-      this.logout();
-    }
-    if (!token) {
-      this.logout();
-    }
-  }
+  // sessionHandles() {
+  //   const timer = JSON.parse(localStorage.getItem('timer'));
+  //   const token = JSON.parse(localStorage.getItem('access_token'));
+  //   if (timer && (Date.now() > timer)) {
+  //     this.logout();
+  //   }
+  //   if (!token) {
+  //     this.logout();
+  //   }
+  // }
 
 }

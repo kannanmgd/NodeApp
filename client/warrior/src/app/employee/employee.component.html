@@ -94,7 +94,8 @@
                     Please enter the pincode
                 </mat-error>
             </mat-form-field>
-            <button [disabled]="!employeeForm.valid" mat-raised-button color="primary">Add Employee</button>
+            <button [disabled]="!employeeForm.valid" mat-raised-button color="primary" *ngIf="addButton">Add Employee</button>
+            <button [disabled]="!employeeForm.valid" mat-raised-button color="primary" *ngIf="updateButton">Update Employee</button>
             <a (click)="goback()" mat-stroked-button color="warn">Back</a>
         </form>
     </div>

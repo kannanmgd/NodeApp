@@ -4,9 +4,20 @@
 .width50 {
     width: 50%;
 }
+.width50 {
+    width: 40%;
+}
 .new-user {
     color: #737373;
 }
 .login-success {
     color: green;
+}
+
+.formBg {
+    padding: 50px;
+    background-color: #fff;
+    -webkit-box-shadow: 6px 7px 15px -2px rgba(0,0,0,0.48);
+    -moz-box-shadow: 6px 7px 15px -2px rgba(0,0,0,0.48);
+    box-shadow: 6px 7px 15px -2px rgba(0,0,0,0.48);
 }
